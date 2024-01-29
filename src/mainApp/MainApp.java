@@ -9,7 +9,10 @@ package mainApp;
  */
 public class MainApp {
 	
-	
+	public void mainApp()
+	{
+		
+	}
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");		
 	} // runApp
@@ -22,5 +25,5 @@ public class MainApp {
 		MainApp mainApp = new MainApp();
 		mainApp.runApp();		
 	} // main
-
+	//testing change
 }
