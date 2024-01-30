@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
@@ -14,12 +15,17 @@ import javax.swing.Timer;
  */
 public class MainApp {
 	private static final int DELAY = 50;
+	public static final int FRAME_WIDTH = 800;
+	public static final int FRAME_HEIGHT = 500;
 	public void mainApp()
 	{
 		
 	}
 	private void runApp() {
 		MainComponent component = new MainComponent();
+		JFrame frame = new JFrame("Jetpack Joyride");
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		
 		Timer t = new Timer(DELAY, new ActionListener() {
 			
 			@Override

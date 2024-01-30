@@ -9,7 +9,15 @@ public abstract class GameObject {
 	public void update()
 	{
 		x += velX;
+		if(x > MainApp.FRAME_WIDTH)
+			x = MainApp.FRAME_WIDTH;
+		else if (x < 0)
+			x = 0;
 		y += velY;
+		if(y > MainApp.FRAME_HEIGHT)
+			y = MainApp.FRAME_HEIGHT;
+		else if (y < 0)
+			y = 0;
 	}
 	public boolean overlapsWith(GameObject other)
 	{
