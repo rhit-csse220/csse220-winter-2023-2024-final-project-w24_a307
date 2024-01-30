@@ -14,27 +14,29 @@ public class MainComponent extends JComponent {
 	public MainComponent()
 	{
 		gameObjects = new ArrayList<GameObject>();
-		hero = new Hero(5, 0, 50, 50, 0, 3);
+		hero = new Hero(5, 0, 0, 3);
 		this.addKeyListener(new KeyAdapter() {
+			@Override
 			public void keyPressed(KeyEvent e)
 			{
 				System.out.println("key pressed");
-				if(e.getKeyChar() == 'w')
-				{
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					System.out.println("SPACE PRESSED");
 					hero.setBoosting(true);
-					System.out.println("Space held");
 				}
 
 			}
+			@Override
 			public void keyReleased(KeyEvent e)
 			{
-				if(e.getKeyChar() == 'w')
-				{
+				System.out.println("key released");
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					System.out.println("SPACE RELEASED");
 					hero.setBoosting(false);
-					System.out.println("Space released");
 				}
 			}
 		});
+		this.setFocusable(true);
 	}
 	public void tick()
 	{

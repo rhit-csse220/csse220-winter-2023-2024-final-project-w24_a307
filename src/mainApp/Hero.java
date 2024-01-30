@@ -11,21 +11,23 @@ public class Hero extends GameObject{
 	public static final int JETPACK_SPEED = -20;
 	public static final int FALLING_SPEED = 20;
 	public static final int RUNNING_SPEED = 10;
-	public Hero(int velX, int velY, int x, int y, int length, int width, int score, int lives) {
-		super(velX, velY, x, y, length, width);
+	public static final int BARRY_HEIGHT = 50;
+	public static final int BARRY_WIDTH = 50;
+	public Hero(int velX, int velY, int x, int y, int width, int height, int score, int lives) {
+		super(velX, velY, x, y, width, height);
 		this.score = score;
 		this.lives = lives;
 		boosting = false;
 	}
-	public Hero(int x, int y, int length, int width, int score, int lives) {
-		super(RUNNING_SPEED, FALLING_SPEED, x, y, length, width);
+	public Hero(int x, int y, int score, int lives) {
+		super(RUNNING_SPEED, FALLING_SPEED, x, y, BARRY_WIDTH, BARRY_HEIGHT);
 		this.score = score;
 		this.lives = lives;
 		boosting = false;
 	}
 	
 	@Override
-	public void handlePickup() {
+	public void handlePickup(Hero hero) {
 		//nothing
 	}
 
@@ -33,7 +35,7 @@ public class Hero extends GameObject{
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.BLACK);
-		g2.fillRect(x, y, width, length);
+		g2.fillRect(x, y, width, height);
 	}
 
 	public void loseLife()

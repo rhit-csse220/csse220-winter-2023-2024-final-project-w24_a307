@@ -3,19 +3,19 @@ package mainApp;
 import java.awt.Graphics;
 
 public abstract class GameObject {
-	protected int velX, velY, x, y, length, width;
-	public abstract void handlePickup();
+	protected int velX, velY, x, y, width, height;
+	public abstract void handlePickup(Hero hero);
 	public abstract void drawOn(Graphics g);
 	public void update()
 	{
 		x += velX;
-		if(x > MainApp.FRAME_WIDTH)
-			x = MainApp.FRAME_WIDTH;
+		if(x > MainApp.FRAME_WIDTH-width)
+			x = MainApp.FRAME_WIDTH-width;
 		else if (x < 0)
 			x = 0;
 		y += velY;
-		if(y > MainApp.FRAME_HEIGHT)
-			y = MainApp.FRAME_HEIGHT;
+		if(y > MainApp.FRAME_HEIGHT-2*height)
+			y = MainApp.FRAME_HEIGHT-2*height;
 		else if (y < 0)
 			y = 0;
 	}
@@ -23,13 +23,13 @@ public abstract class GameObject {
 	{
 		return false; // to be implemented
 	}
-	public GameObject(int velX, int velY, int x, int y, int length, int width) {
+	public GameObject(int velX, int velY, int x, int y, int width, int height) {
 		super();
 		this.velX = velX;
 		this.velY = velY;
 		this.x = x;
 		this.y = y;
-		this.length = length;
+		this.height = height;
 		this.width = width;
 	}
 }
