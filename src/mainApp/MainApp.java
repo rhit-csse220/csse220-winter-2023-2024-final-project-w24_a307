@@ -1,5 +1,10 @@
 package mainApp;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 /**
  * Class: MainApp
@@ -8,16 +13,21 @@ package mainApp;
  * <br>Restrictions: None
  */
 public class MainApp {
-	
+	private static final int DELAY = 50;
 	public void mainApp()
 	{
 		
 	}
 	private void runApp() {
-		System.out.println("Write your cool arcade game here!");
-		System.out.println("Rohan's Change");
-		System.out.println("James's Change");
-		System.out.println("Owen's Change");
+		MainComponent component = new MainComponent();
+		Timer t = new Timer(DELAY, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				component.tick();
+			}
+		});
+		
 	} // runApp
 
 	/**
@@ -28,7 +38,5 @@ public class MainApp {
 		MainApp mainApp = new MainApp();
 		mainApp.runApp();		
 	} // main
-	//testing change
-	//changing test
-	//owen 2
+
 }

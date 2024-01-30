@@ -15,5 +15,13 @@ public abstract class GameObject {
 	{
 		return false; // to be implemented
 	}
-	
+	public GameObject(int velX, int velY, int x, int y, int length, int width) {
+		super();
+		this.velX = velX;
+		this.velY = velY;
+		this.x = x;
+		this.y = y;
+		this.length = length;
+		this.width = width;
+	}
 }
