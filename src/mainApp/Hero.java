@@ -1,5 +1,6 @@
 package mainApp;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -7,9 +8,9 @@ public class Hero extends GameObject{
 	private int score;
 	private int lives;
 	private boolean boosting;
-	public static final int JETPACK_SPEED = -4;
-	public static final int FALLING_SPEED = 4;
-	public static final int RUNNING_SPEED = 4;
+	public static final int JETPACK_SPEED = -20;
+	public static final int FALLING_SPEED = 20;
+	public static final int RUNNING_SPEED = 10;
 	public Hero(int velX, int velY, int x, int y, int length, int width, int score, int lives) {
 		super(velX, velY, x, y, length, width);
 		this.score = score;
@@ -31,7 +32,8 @@ public class Hero extends GameObject{
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.fillRect(velX, velY, width, length);
+		g2.setColor(Color.BLACK);
+		g2.fillRect(x, y, width, length);
 	}
 
 	public void loseLife()

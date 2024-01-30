@@ -16,7 +16,7 @@ import javax.swing.Timer;
 public class MainApp {
 	private static final int DELAY = 50;
 	public static final int FRAME_WIDTH = 800;
-	public static final int FRAME_HEIGHT = 500;
+	public static final int FRAME_HEIGHT = 400;
 	public void mainApp()
 	{
 		
@@ -25,15 +25,19 @@ public class MainApp {
 		MainComponent component = new MainComponent();
 		JFrame frame = new JFrame("Jetpack Joyride");
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		
+		frame.add(component);
 		Timer t = new Timer(DELAY, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				component.tick();
+				component.repaint();
+				frame.repaint();
 			}
 		});
-		
+		t.start();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // runApp
 
 	/**

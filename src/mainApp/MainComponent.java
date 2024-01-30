@@ -13,17 +13,26 @@ public class MainComponent extends JComponent {
 	private ArrayList<GameObject> gameObjects;
 	public MainComponent()
 	{
-		hero = new Hero()
+		gameObjects = new ArrayList<GameObject>();
+		hero = new Hero(5, 0, 50, 50, 0, 3);
 		this.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e)
 			{
-				if(e.getKeyChar() == ' ')
+				System.out.println("key pressed");
+				if(e.getKeyChar() == 'w')
+				{
 					hero.setBoosting(true);
+					System.out.println("Space held");
+				}
+
 			}
 			public void keyReleased(KeyEvent e)
 			{
-				if(e.getKeyChar() == ' ')
+				if(e.getKeyChar() == 'w')
+				{
 					hero.setBoosting(false);
+					System.out.println("Space released");
+				}
 			}
 		});
 	}
