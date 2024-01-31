@@ -24,6 +24,7 @@ public class MainComponent extends JComponent {
 		onLaser.turnOn();
 		gameObjects.add(onLaser);
 		gameObjects.add(new Coin(200,100));
+		gameObjects.add(new Barrier(200, 10, 50, Math.PI/4));
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e)
