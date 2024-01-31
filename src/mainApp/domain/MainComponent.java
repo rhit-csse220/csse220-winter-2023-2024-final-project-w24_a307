@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -65,5 +66,9 @@ public class MainComponent extends JComponent {
 		{
 			object.drawOn(g2);
 		}
+	}
+	public void levelLoader(File file) throws InvalidLevelFormatException
+	{
+		
 	}
 }
