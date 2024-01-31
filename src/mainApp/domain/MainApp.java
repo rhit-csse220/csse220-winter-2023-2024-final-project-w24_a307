@@ -1,4 +1,4 @@
-package mainApp;
+package mainApp.domain;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
