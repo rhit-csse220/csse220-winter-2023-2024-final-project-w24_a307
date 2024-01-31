@@ -21,6 +21,7 @@ public class MainApp {
 	{
 		
 	}
+	//some comment
 	private void runApp() {
 		MainComponent component = new MainComponent();
 		JFrame frame = new JFrame("Jetpack Joyride");
