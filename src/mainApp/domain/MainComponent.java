@@ -5,7 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import javax.swing.JComponent;
 
@@ -67,8 +71,67 @@ public class MainComponent extends JComponent {
 			object.drawOn(g2);
 		}
 	}
-	public void levelLoader(File file) throws InvalidLevelFormatException
+	public void levelLoader(String filename) throws InvalidLevelFormatException
 	{
+		try {
+			FileReader file = new FileReader(filename);
+			Scanner s = new Scanner(file);
+			while(s.hasNext())
+			{
+				String nextLine = s.nextLine();
+				if(nextLine.equals("Laser"))
+				{
+					try {
+						gameObjects.add(new Laser(s.nextInt()));
+					}
+					catch(InputMismatchException e)
+					{
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else if(nextLine.equals("Zapper"))
+				{
+					try {
+						gameObjects.add(new Zapper(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
+					}
+					catch(InputMismatchException e)
+					{
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else if(nextLine.equals("Barrier"))
+				{
+					try {
+						gameObjects.add(new Barrier(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
+					}
+					catch(InputMismatchException e)
+					{
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else if(nextLine.equals("Coin"))
+				{
+					try {
+						gameObjects.add(new Coin(s.nextInt(),s.nextInt()));
+					}
+					catch(InputMismatchException e)
+					{
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else
+					throw new InvalidLevelFormatException();
+			}
+		}
+		catch(InvalidLevelFormatException e)
+		{
+			System.err.println("Invalid format");
+		}
+		catch(IOException e)
+		{
+			System.err.println("File not found, or out of levels.");
+		}
+		
 		
 	}
 }
