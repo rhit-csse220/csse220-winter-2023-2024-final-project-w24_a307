@@ -12,17 +12,20 @@ public class Hero extends GameObject{
 	public static final int FALLING_SPEED = 20;
 	public static final int RUNNING_SPEED = 10;
 	public static final int BARRY_HEIGHT = 50;
-	public static final int BARRY_WIDTH = 50;
+	public static final int BARRY_WIDTH = 30;
+	public static final int STARTING_X = 5;
+	public static final int STARTING_Y = 0;
+	public static final int STARTING_LIVES = 3;
 	public Hero(int velX, int velY, int x, int y, int width, int height, int score, int lives) {
 		super(velX, velY, x, y, width, height);
 		this.score = score;
 		this.lives = lives;
 		boosting = false;
 	}
-	public Hero(int x, int y, int score, int lives) {
-		super(RUNNING_SPEED, FALLING_SPEED, x, y, BARRY_WIDTH, BARRY_HEIGHT);
-		this.score = score;
-		this.lives = lives;
+	public Hero() {
+		super(RUNNING_SPEED, FALLING_SPEED, STARTING_X, STARTING_Y, BARRY_WIDTH, BARRY_HEIGHT);
+		score = 0;
+		lives = STARTING_LIVES;
 		boosting = false;
 	}
 	
@@ -43,6 +46,9 @@ public class Hero extends GameObject{
 		lives--;
 		if(lives <= 0)
 			System.out.println("Game Over.");
+		score = 0;
+		x = STARTING_X;
+		y = STARTING_Y;
 	}
 	public void getPoint(int pointsAdded)
 	{

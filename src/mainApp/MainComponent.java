@@ -14,7 +14,11 @@ public class MainComponent extends JComponent {
 	public MainComponent()
 	{
 		gameObjects = new ArrayList<GameObject>();
-		hero = new Hero(5, 0, 0, 3);
+		hero = new Hero();
+		gameObjects.add(new Zapper(10, 10, 50, Math.PI/4));
+		Zapper onZapper = new Zapper(100, 10, 50, -Math.PI/2);
+		gameObjects.add(onZapper);
+		onZapper.turnOn();
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e)
