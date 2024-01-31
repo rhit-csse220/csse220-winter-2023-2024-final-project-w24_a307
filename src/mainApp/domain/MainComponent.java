@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javax.swing.JComponent;
@@ -91,6 +92,11 @@ public class MainComponent extends JComponent {
 						System.err.println("LaserError");
 						throw new InvalidLevelFormatException();
 					}
+					catch(NoSuchElementException e)
+					{
+						System.err.println("LaserError");
+						throw new InvalidLevelFormatException();
+					}
 				}
 				else if(nextLine.equals("Zapper"))
 				{
@@ -98,6 +104,11 @@ public class MainComponent extends JComponent {
 						gameObjects.add(new Zapper(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
 					}
 					catch(InputMismatchException e)
+					{
+						System.err.println("ZapperError");
+						throw new InvalidLevelFormatException();
+					}
+					catch(NoSuchElementException e)
 					{
 						System.err.println("ZapperError");
 						throw new InvalidLevelFormatException();
@@ -113,6 +124,11 @@ public class MainComponent extends JComponent {
 						System.err.println("BarrierError");
 						throw new InvalidLevelFormatException();
 					}
+					catch(NoSuchElementException e)
+					{
+						System.err.println("BarrierError");
+						throw new InvalidLevelFormatException();
+					}
 				}
 				else if(nextLine.equals("Coin"))
 				{
@@ -120,6 +136,11 @@ public class MainComponent extends JComponent {
 						gameObjects.add(new Coin(s.nextInt(),s.nextInt()));
 					}
 					catch(InputMismatchException e)
+					{
+						System.err.println("CoinError");
+						throw new InvalidLevelFormatException();
+					}
+					catch(NoSuchElementException e)
 					{
 						System.err.println("CoinError");
 						throw new InvalidLevelFormatException();
