@@ -20,6 +20,7 @@ public class MainComponent extends JComponent {
 	{
 		gameObjects = new ArrayList<GameObject>();
 		hero = new Hero();
+		/*
 		gameObjects.add(new Zapper(10, 10, 50, Math.PI/4));
 		Zapper onZapper = new Zapper(100, 10, 50, Math.PI/4);
 		gameObjects.add(onZapper);
@@ -30,6 +31,7 @@ public class MainComponent extends JComponent {
 		gameObjects.add(onLaser);
 		gameObjects.add(new Coin(200,100));
 		gameObjects.add(new Barrier(200, 10, 50, Math.PI/4));
+		*/
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e)
@@ -71,7 +73,7 @@ public class MainComponent extends JComponent {
 			object.drawOn(g2);
 		}
 	}
-	public void levelLoader(String filename) throws InvalidLevelFormatException
+	public void levelLoader(String filename)
 	{
 		try {
 			FileReader file = new FileReader(filename);
@@ -86,6 +88,7 @@ public class MainComponent extends JComponent {
 					}
 					catch(InputMismatchException e)
 					{
+						System.err.println("LaserError");
 						throw new InvalidLevelFormatException();
 					}
 				}
@@ -96,6 +99,7 @@ public class MainComponent extends JComponent {
 					}
 					catch(InputMismatchException e)
 					{
+						System.err.println("ZapperError");
 						throw new InvalidLevelFormatException();
 					}
 				}
@@ -106,6 +110,7 @@ public class MainComponent extends JComponent {
 					}
 					catch(InputMismatchException e)
 					{
+						System.err.println("BarrierError");
 						throw new InvalidLevelFormatException();
 					}
 				}
@@ -116,11 +121,10 @@ public class MainComponent extends JComponent {
 					}
 					catch(InputMismatchException e)
 					{
+						System.err.println("CoinError");
 						throw new InvalidLevelFormatException();
 					}
 				}
-				else
-					throw new InvalidLevelFormatException();
 			}
 		}
 		catch(InvalidLevelFormatException e)
