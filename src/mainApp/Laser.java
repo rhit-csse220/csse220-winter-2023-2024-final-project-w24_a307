@@ -5,16 +5,35 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Laser extends Obstacle{
-
-	public Laser(int velX, int velY, int x, int y, int width, int height) {
-		super(velX, velY, x, y, width, height);
-		// TODO Auto-generated constructor stub
+	private int countdown;
+	private boolean isOn;
+	public static final int LASER_WIDTH = 10;
+	public static final int LASER_HEIGHT = 10;
+	public static final int TIME_BEFORE_ON = 100;
+	public static final int DURATION = 10;
+	public Laser(int y) {
+		super(0, 0, 0, y, LASER_WIDTH, LASER_HEIGHT);
+		countdown = TIME_BEFORE_ON;
+		isOn = false;
 	}
 
 	@Override
 	public void drawOn(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.RED);
+		if(isOn)
+		{
+			g2.fillRect(0, y, MainApp.FRAME_WIDTH, LASER_HEIGHT);
+		}
+		else
+		{
+			g2.fillRect(0, y, LASER_WIDTH, LASER_HEIGHT);
+			g2.fillRect(MainApp.FRAME_WIDTH-LASER_WIDTH-15, y, LASER_WIDTH, LASER_HEIGHT);
+		} //-15 is because otherwise it loads off the screen for unknown reasons
 	}
 	
+	public void turnOn() //for testing, delete later
+	{
+		isOn = true;
+	}
 }

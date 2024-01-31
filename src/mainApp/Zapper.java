@@ -12,6 +12,7 @@ public class Zapper extends Obstacle {
 	public static final int ZAPPER_WIDTH = 10;
 	public static final int ZAPPER_HEIGHT = 10;
 	public static final int TIME_BEFORE_ON = 100;
+	public static final int DURATION = 10;
 	public Zapper(int x, int y, int length, double rotation) {
 		super(0, 0, x, y, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 		this.rotation = rotation;
@@ -26,7 +27,7 @@ public class Zapper extends Obstacle {
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.RED);
+		g2.setColor(Color.ORANGE);
 		g2.translate(x,y);
 		g2.rotate(rotation);
 		if(isOn)
@@ -38,7 +39,7 @@ public class Zapper extends Obstacle {
 			g2.fillRect(0, 0, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 			g2.fillRect(length-ZAPPER_WIDTH, 0, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 		}
-		g2.rotate(rotation);
+		g2.rotate(-rotation);
 		g2.translate(-x,-y);
 	}
 }
