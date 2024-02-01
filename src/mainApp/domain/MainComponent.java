@@ -43,6 +43,18 @@ public class MainComponent extends JComponent {
 					System.out.println("SPACE PRESSED");
 					hero.setBoosting(true);
 				}
+				else if(e.getKeyCode() == KeyEvent.VK_U)
+				{
+					level++;
+					System.out.println("Loading level "+level);
+					levelLoader("Level"+level);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_D)
+				{
+					level--;
+					System.out.println("Loading level "+level);
+					levelLoader("Level"+level);
+				}
 
 			}
 			@Override
@@ -57,12 +69,7 @@ public class MainComponent extends JComponent {
 			@Override
 			public void keyTyped(KeyEvent e)
 			{
-				if(e.getKeyCode() == KeyEvent.VK_U)
-				{
-					level++;
-					levelLoader("Level"+level);
-				}
-				else if(e.getKeyCode() == KeyEvent.VK_D);
+				
 			}
 		});
 		this.setFocusable(true);

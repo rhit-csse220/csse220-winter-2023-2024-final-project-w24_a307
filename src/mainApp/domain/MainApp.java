@@ -37,7 +37,7 @@ public class MainApp {
 			}
 		});
 		t.start();
-		component.levelLoader("Level1");
+		//component.levelLoader("Level1");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	} // runApp
