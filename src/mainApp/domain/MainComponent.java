@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 public class MainComponent extends JComponent {
 	private Hero hero;
 	private ArrayList<GameObject> gameObjects;
+	private int level;
 	public MainComponent()
 	{
 		gameObjects = new ArrayList<GameObject>();
@@ -53,8 +54,19 @@ public class MainComponent extends JComponent {
 					hero.setBoosting(false);
 				}
 			}
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				if(e.getKeyCode() == KeyEvent.VK_U)
+				{
+					level++;
+					levelLoader("Level"+level);
+				}
+				else if(e.getKeyCode() == KeyEvent.VK_D);
+			}
 		});
 		this.setFocusable(true);
+		level = 0;
 	}
 	public void tick()
 	{
@@ -76,6 +88,7 @@ public class MainComponent extends JComponent {
 	}
 	public void levelLoader(String filename)
 	{
+		gameObjects.clear();
 		try {
 			FileReader file = new FileReader(filename);
 			Scanner s = new Scanner(file);
