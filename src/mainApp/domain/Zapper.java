@@ -11,18 +11,36 @@ public class Zapper extends Obstacle {
 	private double rotation;
 	public static final int ZAPPER_WIDTH = 10;
 	public static final int ZAPPER_HEIGHT = 10;
-	public static final int TIME_BEFORE_ON = 100;
+	public static final int TIME_BEFORE_ON = 50;
 	public static final int DURATION = 10;
 	public Zapper(int x, int y, int length, double rotation) {
 		super(0, 0, x, y, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 		this.rotation = rotation;
 		this.length = length;
-		countdown = 0;
+		countdown = TIME_BEFORE_ON;
 	}
 	
 	public void turnOn() //for testing, delete later
 	{
 		isOn = true;
+	}
+	
+	@Override
+	public void update()
+	{
+		super.update();
+		if(countdown == 0 && !isOn)
+		{
+			countdown = DURATION;
+			isOn = true;
+		}
+		else if (countdown == 0)
+		{
+			countdown = TIME_BEFORE_ON;
+			isOn = false;
+		}
+		else
+			countdown--;
 	}
 	@Override
 	public void drawOn(Graphics g) {

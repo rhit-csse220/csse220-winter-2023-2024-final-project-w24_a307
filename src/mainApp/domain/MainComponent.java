@@ -176,7 +176,7 @@ public class MainComponent extends JComponent {
 		}
 		catch(IOException e)
 		{
-			System.err.println("File not found, or out of levels.");
+			System.err.println("Level not found.");
 		}
 		
 		

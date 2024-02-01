@@ -19,7 +19,7 @@ public abstract class GameObject {
 		else if (y < 0)
 			y = 0;
 	}
-	public boolean overlapsWith(GameObject other)
+	public boolean overlapsWith(Hero hero)
 	{
 		return false; // to be implemented
 	}

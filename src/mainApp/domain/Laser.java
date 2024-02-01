@@ -32,6 +32,23 @@ public class Laser extends Obstacle{
 		} //-15 is because otherwise it loads off the screen for unknown reasons
 	}
 	
+	public void update()
+	{
+		super.update();
+		if(countdown == 0 && !isOn)
+		{
+			countdown = DURATION;
+			isOn = true;
+		}
+		else if (countdown == 0)
+		{
+			countdown = TIME_BEFORE_ON;
+			isOn = false;
+		}
+		else
+			countdown--;
+	}
+	
 	public void turnOn() //for testing, delete later
 	{
 		isOn = true;
