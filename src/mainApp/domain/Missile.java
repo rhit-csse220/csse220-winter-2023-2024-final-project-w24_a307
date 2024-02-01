@@ -1,18 +1,22 @@
 package mainApp.domain;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Missile extends Obstacle{
-
-	public Missile(int velX, int velY, int x, int y, int width, int height) {
-		super(velX, velY, x, y, width, height);
-		// TODO Auto-generated constructor stub
+	public static final int MISSILE_X_SPEED = -Hero.RUNNING_SPEED; 
+	public static final int MISSILE_WIDTH = 20;
+	public static final int MISSILE_HEIGHT = 10;
+	public Missile(int x, int y) {
+		super(MISSILE_X_SPEED, 0, x, y, MISSILE_WIDTH, MISSILE_HEIGHT);
+		
 	}
-
 	@Override
 	public void drawOn(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.RED);
+		g2.fillOval(x, y, width, height);
 	}
 
 }

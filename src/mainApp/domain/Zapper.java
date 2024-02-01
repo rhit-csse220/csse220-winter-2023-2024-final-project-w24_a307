@@ -60,4 +60,19 @@ public class Zapper extends Obstacle {
 		g2.rotate(-rotation);
 		g2.translate(-x,-y);
 	}
+	@Override
+	public boolean overlapsWith(Hero hero)
+	{
+		if(!isOn)
+			return false;
+		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
+		{
+			if(y+(hero.x-x)*Math.cos(rotation) < hero.y + height && y+(hero.x-x)*Math.cos(rotation)+Math.sin(rotation)*height > hero.y)
+			{
+				System.out.println(this+"overlaps with hero"); // for testing
+				return true;
+			}
+		}
+		return false;
+	}
 }

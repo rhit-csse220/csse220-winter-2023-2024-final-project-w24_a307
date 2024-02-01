@@ -83,6 +83,8 @@ public class MainComponent extends JComponent {
 		for(GameObject object : gameObjects)
 		{
 			object.update();
+			if(object.overlapsWith(hero))
+				object.handlePickup(hero);
 		}
 	}
 	@Override
@@ -165,6 +167,38 @@ public class MainComponent extends JComponent {
 					catch(NoSuchElementException e)
 					{
 						System.err.println("CoinError");
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else if(nextLine.equals("Missile"))
+				{
+					try {
+						gameObjects.add(new Missile(s.nextInt(),s.nextInt()));
+					}
+					catch(InputMismatchException e)
+					{
+						System.err.println("MissileError");
+						throw new InvalidLevelFormatException();
+					}
+					catch(NoSuchElementException e)
+					{
+						System.err.println("MissileError");
+						throw new InvalidLevelFormatException();
+					}
+				}
+				else if(nextLine.equals("TrackingMissile"))
+				{
+					try {
+						gameObjects.add(new TrackingMissile(s.nextInt(),s.nextInt(), hero));
+					}
+					catch(InputMismatchException e)
+					{
+						System.err.println("TrackingMissileError");
+						throw new InvalidLevelFormatException();
+					}
+					catch(NoSuchElementException e)
+					{
+						System.err.println("TrackingMissileError");
 						throw new InvalidLevelFormatException();
 					}
 				}

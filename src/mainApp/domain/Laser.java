@@ -49,6 +49,18 @@ public class Laser extends Obstacle{
 			countdown--;
 	}
 	
+	@Override
+	public boolean overlapsWith(Hero hero)
+	{
+		if(!isOn)
+			return false;
+		if(y+height > hero.y && y < hero.y + hero.height)
+		{
+			System.out.println(this+"overlaps with hero"); // for testing
+			return true;
+		}
+	return false;
+	}
 	public void turnOn() //for testing, delete later
 	{
 		isOn = true;

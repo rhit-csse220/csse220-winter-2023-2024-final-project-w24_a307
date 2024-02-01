@@ -21,7 +21,15 @@ public abstract class GameObject {
 	}
 	public boolean overlapsWith(Hero hero)
 	{
-		return false; // to be implemented
+		if(x+width > hero.x && x < hero.x + hero.width)
+		{
+			if(y+height > hero.y && y < hero.y + hero.height)
+			{
+				System.out.println(this+"overlaps with hero"); // for testing
+				return true;
+			}
+		}
+		return false;
 	}
 	public GameObject(int velX, int velY, int x, int y, int width, int height) {
 		super();
@@ -39,5 +47,13 @@ public abstract class GameObject {
 	public void setY(int y)
 	{
 		this.y = y;
+	}
+	public int getX()
+	{
+		return x;
+	}
+	public int getY()
+	{
+		return y;
 	}
 }
