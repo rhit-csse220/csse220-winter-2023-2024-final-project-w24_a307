@@ -168,6 +168,7 @@ public class MainComponent extends JComponent {
 						throw new InvalidLevelFormatException();
 					}
 				}
+				s.close();
 			}
 		}
 		catch(InvalidLevelFormatException e)
