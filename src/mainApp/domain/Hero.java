@@ -62,5 +62,9 @@ public class Hero extends GameObject{
 		else
 			velY = FALLING_SPEED;
 	}
-	
+	public void resetPosition()
+	{
+		x = STARTING_X;
+		y = STARTING_Y;
+	}
 }

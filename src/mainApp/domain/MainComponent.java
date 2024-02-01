@@ -47,12 +47,14 @@ public class MainComponent extends JComponent {
 				{
 					level++;
 					System.out.println("Loading level "+level);
+					hero.resetPosition();
 					levelLoader("Level"+level);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_D)
 				{
 					level--;
 					System.out.println("Loading level "+level);
+					hero.resetPosition();
 					levelLoader("Level"+level);
 				}
 
