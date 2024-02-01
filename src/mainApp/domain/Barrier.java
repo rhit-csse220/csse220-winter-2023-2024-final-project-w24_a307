@@ -27,7 +27,7 @@ public class Barrier extends GameObject{
 	}
 	@Override
 	public void handlePickup(Hero hero) {
-		//nothing, do not let him pass.
+		//do not let him pass.
 	}
 
 }
