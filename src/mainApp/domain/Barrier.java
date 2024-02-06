@@ -27,7 +27,25 @@ public class Barrier extends GameObject{
 	}
 	@Override
 	public void handlePickup(Hero hero) {
-		//do not let him pass.
+		//hero.setVelX(0);
+		//hero.setX(x-Hero.BARRY_WIDTH);
+	}
+	public boolean overlapsWith(Hero hero)
+	{
+		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
+		{
+			System.out.println("x overlap");
+			if(-Math.tan(rotation)*(hero.x+hero.width-x)+y > hero.y && -Math.tan(rotation)*(hero.x+hero.width-x)+y < hero.y+hero.height)
+			{
+				System.out.println(this+"overlaps with hero"); // for testing
+				return true;
+			}
+		}
+		if(Math.tan(rotation)*(hero.x+hero.width-x)+y > hero.y && Math.tan(rotation)*(hero.x+hero.width-x)+y < hero.y+hero.height)
+		{ // for testing
+			System.out.println("y overlap");
+		}
+		return false;
 	}
 
 }

@@ -10,7 +10,7 @@ public class Hero extends GameObject{
 	private boolean boosting;
 	public static final int JETPACK_SPEED = -20;
 	public static final int FALLING_SPEED = 20;
-	public static final int RUNNING_SPEED = 10;
+	public static final int RUNNING_SPEED = 5;
 	public static final int BARRY_HEIGHT = 50;
 	public static final int BARRY_WIDTH = 30;
 	public static final int STARTING_X = 5;
@@ -66,5 +66,17 @@ public class Hero extends GameObject{
 	{
 		x = STARTING_X;
 		y = STARTING_Y;
+	}
+	public int getScore()
+	{
+		return score;
+	}
+	public int getLives()
+	{
+		return lives;
+	}
+	public void setVelX(int velX)
+	{
+		this.velX = velX;
 	}
 }

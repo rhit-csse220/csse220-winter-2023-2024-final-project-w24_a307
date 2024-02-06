@@ -56,4 +56,8 @@ public abstract class GameObject {
 	{
 		return y;
 	}
+	public boolean toRemove()
+	{
+		return false;
+	}
 }

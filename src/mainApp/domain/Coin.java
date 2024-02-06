@@ -7,15 +7,25 @@ import java.awt.Graphics2D;
 public class Coin extends GameObject {
 	public static final int COIN_WIDTH = 20;
 	public static final int COIN_HEIGHT = 20;
+	private boolean collected;
 	public Coin(int x, int y) {
 		super(0, 0, x, y, COIN_WIDTH, COIN_HEIGHT);
+		collected = false;
 	}
 
 	@Override
 	public void handlePickup(Hero hero) {
-		hero.getPoint(1);
+		if(!collected)
+		{
+			hero.getPoint(1);
+			collected = true;
+		}
 	}
-
+	@Override 
+	public boolean toRemove()
+	{
+		return collected;
+	}
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
