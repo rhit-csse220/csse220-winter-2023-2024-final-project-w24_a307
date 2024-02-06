@@ -18,5 +18,12 @@ public class Missile extends Obstacle{
 		g2.setColor(Color.RED);
 		g2.fillOval(x, y, width, height);
 	}
+	@Override 
+	public void update()
+	{
+		super.update();
+		if(x <= 0)
+			this.x =  MainApp.FRAME_WIDTH;
+	}
 
 }
