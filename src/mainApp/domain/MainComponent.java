@@ -121,7 +121,6 @@ public class MainComponent extends JComponent {
 			if(barrier.overlapsWith(hero))
 			{
 				blocked = true;
-				
 			}			
 		}
 		if(blocked)
@@ -130,7 +129,10 @@ public class MainComponent extends JComponent {
 			//hero.setX(hero.getX()-Hero.BARRY_WIDTH);
 		}
 		else
+		{
 			hero.setVelX(Hero.RUNNING_SPEED);
+			hero.setYBlocked(false);
+		}
 
 	}
 	

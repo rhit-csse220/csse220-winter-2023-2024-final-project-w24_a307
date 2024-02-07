@@ -8,6 +8,8 @@ public class Hero extends GameObject{
 	private int score;
 	private int lives;
 	private boolean boosting;
+	private boolean yblocked;
+	private boolean above;
 	public static final int JETPACK_SPEED = -4;
 	public static final int FALLING_SPEED = 4;
 	public static final int RUNNING_SPEED = 1;
@@ -21,12 +23,15 @@ public class Hero extends GameObject{
 		this.score = score;
 		this.lives = lives;
 		boosting = false;
+		yblocked = false;
 	}
 	public Hero() {
 		super(RUNNING_SPEED, FALLING_SPEED, STARTING_X, STARTING_Y, BARRY_WIDTH, BARRY_HEIGHT);
 		score = 0;
 		lives = STARTING_LIVES;
 		boosting = false;
+		yblocked = false;
+		setAbove(true);
 	}
 	
 	@Override
@@ -56,11 +61,17 @@ public class Hero extends GameObject{
 	}
 	public void setBoosting(boolean isBoosting)
 	{
-		boosting = isBoosting;
-		if(isBoosting)
-			velY = JETPACK_SPEED;
-		else
-			velY = FALLING_SPEED;
+			boosting = isBoosting;
+			if(isBoosting)
+			{
+				if(above || !yblocked)
+					velY = JETPACK_SPEED;
+			}
+			else
+			{
+				if(!above || !yblocked)
+					velY = FALLING_SPEED;
+			}
 	}
 	public void resetPosition()
 	{
@@ -78,5 +89,19 @@ public class Hero extends GameObject{
 	
 	public int getVelX() {
 		return velX;
+	}
+	public boolean isYBlocked()
+	{
+		return yblocked;
+	}
+	public void setYBlocked(boolean isBlocked)
+	{
+		yblocked = isBlocked;
+	}
+	public boolean isAbove() {
+		return above;
+	}
+	public void setAbove(boolean above) {
+		this.above = above;
 	}
 }
