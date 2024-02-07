@@ -75,4 +75,8 @@ public class Hero extends GameObject{
 	{
 		return lives;
 	}
+	
+	public int getVelX() {
+		return velX;
+	}
 }
