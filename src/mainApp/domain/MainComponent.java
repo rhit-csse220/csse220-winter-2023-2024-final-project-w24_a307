@@ -40,9 +40,9 @@ public class MainComponent extends JComponent {
 			@Override
 			public void keyPressed(KeyEvent e)
 			{
-				//System.out.println("key pressed");
+				System.out.println("key pressed");
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					//System.out.println("SPACE PRESSED");
+					System.out.println("SPACE PRESSED");
 					hero.setBoosting(true);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_U)
@@ -66,7 +66,7 @@ public class MainComponent extends JComponent {
 			{
 				System.out.println("key released");
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					//System.out.println("SPACE RELEASED");
+					System.out.println("SPACE RELEASED");
 					hero.setBoosting(false);
 				}
 			}
@@ -79,28 +79,15 @@ public class MainComponent extends JComponent {
 		this.setFocusable(true);
 		level = 0;
 	}
-	public int getScore()
-	{
-		return hero.getScore();
-	}
-	public int getLives()
-	{
-		return hero.getLives();
-	}
 	public void tick()
 	{
 		hero.update();
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		for(GameObject object : gameObjects)
 		{
 			object.update();
 			if(object.overlapsWith(hero))
 				object.handlePickup(hero);
-			if(object.toRemove())
-				toRemove.add(object);
 		}
-		for(GameObject object : toRemove)
-			gameObjects.remove(object);
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
