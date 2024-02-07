@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class HeroTest {
+public class MissileTest {
 
 	@Test
-	public void test() {
+	public void testOverlapsWith() {
 		fail("Not yet implemented");
 	}
 
