@@ -14,7 +14,7 @@ import javax.swing.Timer;
  * <br>Restrictions: None
  */
 public class MainApp {
-	private static final int DELAY = 20;
+	private static final int DELAY = 5;
 	public static final int FRAME_WIDTH = 800;
 	public static final int FRAME_HEIGHT = 400;
 	public void mainApp()

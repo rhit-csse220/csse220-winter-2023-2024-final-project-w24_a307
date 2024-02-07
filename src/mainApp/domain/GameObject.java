@@ -40,6 +40,18 @@ public abstract class GameObject {
 		this.height = height;
 		this.width = width;
 	}
+	public int getVelX() {
+		return velX;
+	}
+	public void setVelX(int velX) {
+		this.velX = velX;
+	}
+	public int getVelY() {
+		return velY;
+	}
+	public void setVelY(int velY) {
+		this.velY = velY;
+	}
 	public void setX(int x)
 	{
 		this.x = x;

@@ -8,6 +8,8 @@ public class Zapper extends Obstacle {
 	private int length;
 	private int countdown;
 	private boolean isOn;
+	private int x2;
+	private int y2;
 	private double rotation;
 	public static final int ZAPPER_WIDTH = 10;
 	public static final int ZAPPER_HEIGHT = 10;
@@ -18,6 +20,8 @@ public class Zapper extends Obstacle {
 		this.rotation = rotation;
 		this.length = length;
 		countdown = TIME_BEFORE_ON;
+		x2 = (int) (x+length*Math.cos(rotation));
+		y2 = (int) (y+length*Math.sin(rotation));
 	}
 	
 	public void turnOn() //for testing, delete later
@@ -67,9 +71,18 @@ public class Zapper extends Obstacle {
 			return false;
 		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
 		{
-			if(y+(hero.x-x)*Math.cos(rotation) < hero.y + height && y+(hero.x-x)*Math.cos(rotation)+Math.sin(rotation)*height > hero.y)
+			//System.out.println(this + " x overlap");
+			
+			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) >= hero.y )
 			{
-				System.out.println(this+"overlaps with hero"); // for testing
+				//System.out.println("above");
+				
+				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height)
+				{
+					System.out.println(this+"overlaps with hero"); // for testing
+					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);
+					System.out.println("Hero: "+hero.y);
+				}
 				return true;
 			}
 		}

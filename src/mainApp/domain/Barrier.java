@@ -8,12 +8,19 @@ public class Barrier extends GameObject{
 
 	private int length;
 	private double rotation;
+	private int x2;
+	private int y2;
+	private boolean above;
 	public static final int BARRIER_HEIGHT = 10;
 	public Barrier(int x, int y, int length, double rotation)
 	{
 		super(0, 0, x, y, length, BARRIER_HEIGHT);
 		this.length = length;
 		this.rotation = rotation;
+		x2 = (int) (x+length*Math.cos(rotation));
+		y2 = (int) (y+length*Math.sin(rotation));
+		above = false;
+		System.out.println("New Barrier with "+x+", "+y+" "+x2+","+y2);
 	}
 	@Override
 	public void drawOn(Graphics g) {
@@ -27,24 +34,56 @@ public class Barrier extends GameObject{
 	}
 	@Override
 	public void handlePickup(Hero hero) {
-		//hero.setVelX(0);
-		//hero.setX(x-Hero.BARRY_WIDTH);
+		
 	}
 	public boolean overlapsWith(Hero hero)
 	{
 		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
 		{
-			System.out.println("x overlap");
-			if(-Math.tan(rotation)*(hero.x+hero.width-x)+y > hero.y && -Math.tan(rotation)*(hero.x+hero.width-x)+y < hero.y+hero.height)
+			//System.out.println(this + " x overlap");
+			
+			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) >= hero.y )
 			{
+				//System.out.println("above");
+				
+				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height)
+				{
+					System.out.println(this+"overlaps with hero"); // for testing
+					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);
+					System.out.println("Hero: "+hero.y);
+				}
+				return true;
+			}
+			
+			/*
+			if(Math.sin(rotation)*length+y > hero.y && y < hero.y + hero.height)
+			{
+				if(hero.y > Math.tan(rotation)*(hero.x+hero.width-x)+y)
+				{
+					above = false;
+				}
+				else
+				{
+					above = true;
+				}
+				System.out.println("rectangular y overlap");
+				System.out.println(this+"overlaps with hero");
+				return true;
+			}
+			*/
+		}
+		/*
+		if(Math.sin(rotation)*length+y > hero.y && y < hero.y + hero.height)
+		{
+			System.out.println(this + "y second overlap");
+			if(Math.cos(rotation) > hero.y && Math.tan(rotation)*(hero.x+hero.width-x)+y < hero.y+hero.height)
+			{
+				System.out.println("good y overlap");
 				System.out.println(this+"overlaps with hero"); // for testing
 				return true;
 			}
 		}
-		if(Math.tan(rotation)*(hero.x+hero.width-x)+y > hero.y && Math.tan(rotation)*(hero.x+hero.width-x)+y < hero.y+hero.height)
-		{ // for testing
-			System.out.println("y overlap");
-		}
+		*/
 		return false;
 	}
 
