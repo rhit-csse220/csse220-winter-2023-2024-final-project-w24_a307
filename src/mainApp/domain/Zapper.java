@@ -71,19 +71,15 @@ public class Zapper extends Obstacle {
 			return false;
 		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
 		{
-			//System.out.println(this + " x overlap");
-			
 			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) >= hero.y )
 			{
-				//System.out.println("above");
-				
-				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height)
+				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height+Math.abs(y2-y))
 				{
 					System.out.println(this+"overlaps with hero"); // for testing
 					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);
 					System.out.println("Hero: "+hero.y);
+					return true;
 				}
-				return true;
 			}
 		}
 		return false;

@@ -20,12 +20,17 @@ import javax.swing.JLabel;
 
 public class MainComponent extends JComponent {
 	private Hero hero;
-	private ArrayList<GameObject> gameObjects;
-	private int level;
 	private BufferedImage img;
+	private ArrayList<Obstacle> obstacles;
+	private ArrayList<Coin> coins;
+	private ArrayList<Barrier> barriers;
+
+	private int level;
 	public MainComponent()
 	{
-		gameObjects = new ArrayList<GameObject>();
+		obstacles = new ArrayList<>();
+		coins = new ArrayList<>();
+		barriers = new ArrayList<>();
 		hero = new Hero();
 		/*
 		gameObjects.add(new Zapper(10, 10, 50, Math.PI/4));
@@ -43,9 +48,7 @@ public class MainComponent extends JComponent {
 			@Override
 			public void keyPressed(KeyEvent e)
 			{
-				System.out.println("key pressed");
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					System.out.println("SPACE PRESSED");
 					hero.setBoosting(true);
 				}
 				else if(e.getKeyCode() == KeyEvent.VK_U)
@@ -67,9 +70,7 @@ public class MainComponent extends JComponent {
 			@Override
 			public void keyReleased(KeyEvent e)
 			{
-				System.out.println("key released");
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					System.out.println("SPACE RELEASED");
 					hero.setBoosting(false);
 				}
 			}
@@ -82,35 +83,92 @@ public class MainComponent extends JComponent {
 		this.setFocusable(true);
 		level = 0;
 	}
+	public int getScore()
+	{
+		return hero.getScore();
+	}
+	public int getLives()
+	{
+		return hero.getLives();
+	}
 	public void tick()
 	{
 		hero.update();
-		for(GameObject object : gameObjects)
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		for(Obstacle obstacle : obstacles)
 		{
-			object.update();
-			if(object.overlapsWith(hero))
-				object.handlePickup(hero);
+			obstacle.update();
+			if(obstacle.overlapsWith(hero))
+			{
+				hero.loseLife();
+				System.out.println("You died to "+obstacle);
+			}			
 		}
+		for(Coin coin : coins)
+		{
+			coin.update();
+			if(coin.overlapsWith(hero))
+			{
+				hero.getPoint(1);
+				toRemove.add(coin);
+			}			
+		}
+		for(GameObject object : toRemove)
+		{
+			coins.remove(object);
+		}
+		boolean blocked = false;
+		for(Barrier barrier : barriers)
+		{
+			barrier.update();
+			if(barrier.overlapsWith(hero))
+			{
+				blocked = true;
+			}			
+		}
+		if(blocked)
+		{
+			hero.setVelX(0);
+			//hero.setX(hero.getX()-Hero.BARRY_WIDTH);
+		}
+		else
+		{
+			hero.setVelX(Hero.RUNNING_SPEED);
+			hero.setYBlocked(false);
+		}
+
 	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(img, 0, 0, 800, 400, null);
 		hero.drawOn(g2);
-		for(GameObject object : gameObjects)
+		for(GameObject object : coins)
+		{
+			object.drawOn(g2);
+		}
+		for(GameObject object : barriers)
+		{
+			object.drawOn(g2);
+		}
+		for(GameObject object : obstacles)
 		{
 			object.drawOn(g2);
 		}
 	}
 	public void levelLoader(String filename)
 	{
-		gameObjects.clear();
+		obstacles.clear();
+		barriers.clear();
+		coins.clear();
 		try {
 			img = ImageIO.read(new File("images/background-"+filename.toLowerCase()+".jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		try {
 			FileReader file = new FileReader(filename);
 			Scanner s = new Scanner(file);
@@ -120,7 +178,7 @@ public class MainComponent extends JComponent {
 				if(nextLine.equals("Laser"))
 				{
 					try {
-						gameObjects.add(new Laser(s.nextInt()));
+						obstacles.add(new Laser(s.nextInt()));
 					}
 					catch(InputMismatchException e)
 					{
@@ -136,7 +194,7 @@ public class MainComponent extends JComponent {
 				else if(nextLine.equals("Zapper"))
 				{
 					try {
-						gameObjects.add(new Zapper(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
+						obstacles.add(new Zapper(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
 					}
 					catch(InputMismatchException e)
 					{
@@ -152,7 +210,7 @@ public class MainComponent extends JComponent {
 				else if(nextLine.equals("Barrier"))
 				{
 					try {
-						gameObjects.add(new Barrier(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
+						barriers.add(new Barrier(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
 					}
 					catch(InputMismatchException e)
 					{
@@ -168,7 +226,7 @@ public class MainComponent extends JComponent {
 				else if(nextLine.equals("Coin"))
 				{
 					try {
-						gameObjects.add(new Coin(s.nextInt(),s.nextInt()));
+						coins.add(new Coin(s.nextInt(),s.nextInt()));
 					}
 					catch(InputMismatchException e)
 					{
@@ -184,7 +242,7 @@ public class MainComponent extends JComponent {
 				else if(nextLine.equals("Missile"))
 				{
 					try {
-						gameObjects.add(new Missile(s.nextInt(),s.nextInt()));
+						obstacles.add(new Missile(s.nextInt(),s.nextInt()));
 					}
 					catch(InputMismatchException e)
 					{
@@ -200,7 +258,7 @@ public class MainComponent extends JComponent {
 				else if(nextLine.equals("TrackingMissile"))
 				{
 					try {
-						gameObjects.add(new TrackingMissile(s.nextInt(),s.nextInt(), hero));
+						obstacles.add(new TrackingMissile(s.nextInt(),s.nextInt(), hero));
 					}
 					catch(InputMismatchException e)
 					{
