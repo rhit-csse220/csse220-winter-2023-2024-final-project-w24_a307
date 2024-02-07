@@ -3,6 +3,11 @@ package mainApp.domain;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Hero extends GameObject{
 	private int score;
@@ -37,8 +42,16 @@ public class Hero extends GameObject{
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		BufferedImage img;
+		try {
+			img = ImageIO.read(new File("images/hero.gif"));
+			g2.drawImage(img, x, y, width, height, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		g2.setColor(Color.BLACK);
-		g2.fillRect(x, y, width, height);
+		g2.drawRect(x, y, width, height);
 	}
 
 	public void loseLife()
