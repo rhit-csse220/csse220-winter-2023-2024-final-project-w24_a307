@@ -42,11 +42,11 @@ public class Barrier extends GameObject{
 		{
 			//System.out.println(this + " x overlap");
 			
-			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) >= hero.y )
+			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,Math.max(y,y2)) >= hero.y )
 			{
 				//System.out.println("above");
 				
-				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height)
+				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y, Math.max(y2,y)) <= hero.y+hero.height+Math.abs(y2-y))
 				{
 					System.out.println(this+"overlaps with hero"); // for testing
 					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);

@@ -121,10 +121,14 @@ public class MainComponent extends JComponent {
 			if(barrier.overlapsWith(hero))
 			{
 				blocked = true;
+				
 			}			
 		}
 		if(blocked)
+		{
 			hero.setVelX(0);
+			//hero.setX(hero.getX()-Hero.BARRY_WIDTH);
+		}
 		else
 			hero.setVelX(Hero.RUNNING_SPEED);
 
