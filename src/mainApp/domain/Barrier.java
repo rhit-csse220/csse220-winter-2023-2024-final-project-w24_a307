@@ -51,8 +51,9 @@ public class Barrier extends GameObject{
 					System.out.println(this+"overlaps with hero"); // for testing
 					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);
 					System.out.println("Hero: "+hero.y);
+					return true;
 				}
-				return true;
+				
 			}
 			
 			/*

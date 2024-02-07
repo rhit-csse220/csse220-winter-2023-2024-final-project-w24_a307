@@ -1,10 +1,13 @@
 package mainApp.domain;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -26,6 +29,13 @@ public class MainApp {
 		MainComponent component = new MainComponent();
 		JFrame frame = new JFrame("Jetpack Joyride");
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		
+		JPanel info = new JPanel();
+		JLabel score = new JLabel("Score: "+component.getScore());
+		JLabel lives = new JLabel("Lives: "+component.getLives());
+		info.add(score);
+		info.add(lives);
+		frame.add(info, BorderLayout.NORTH);
 		frame.add(component);
 		Timer t = new Timer(DELAY, new ActionListener() {
 			
@@ -34,9 +44,12 @@ public class MainApp {
 				component.tick();
 				component.repaint();
 				frame.repaint();
+				score.setText("Score: " + component.getScore());
+				lives.setText("Lives: "+component.getLives());
 			}
 		});
 		t.start();
+		
 		//component.levelLoader("Level1");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
