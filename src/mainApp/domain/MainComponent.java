@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,11 +14,13 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 public class MainComponent extends JComponent {
 	private Hero hero;
+	private BufferedImage img;
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Coin> coins;
 	private ArrayList<Barrier> barriers;
@@ -140,6 +143,7 @@ public class MainComponent extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		g2.drawImage(img, 0, 0, 800, 400, null);
 		hero.drawOn(g2);
 		for(GameObject object : coins)
 		{
@@ -159,6 +163,12 @@ public class MainComponent extends JComponent {
 		obstacles.clear();
 		barriers.clear();
 		coins.clear();
+		try {
+			img = ImageIO.read(new File("images/background-"+filename.toLowerCase()+".jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		try {
 			FileReader file = new FileReader(filename);
 			Scanner s = new Scanner(file);
