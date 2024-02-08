@@ -10,8 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Hero extends GameObject{
-	private int score;
-	private int lives;
 	private boolean boosting;
 	private boolean yblocked;
 	private boolean above;
@@ -22,18 +20,14 @@ public class Hero extends GameObject{
 	public static final int BARRY_WIDTH = 30;
 	public static final int STARTING_X = 5;
 	public static final int STARTING_Y = 0;
-	public static final int STARTING_LIVES = 3;
-	public Hero(int velX, int velY, int x, int y, int width, int height, int score, int lives) {
+	
+	public Hero(int velX, int velY, int x, int y, int width, int height) {
 		super(velX, velY, x, y, width, height);
-		this.score = score;
-		this.lives = lives;
 		boosting = false;
 		yblocked = false;
 	}
 	public Hero() {
 		super(RUNNING_SPEED, FALLING_SPEED, STARTING_X, STARTING_Y, BARRY_WIDTH, BARRY_HEIGHT);
-		score = 0;
-		lives = STARTING_LIVES;
 		boosting = false;
 		yblocked = false;
 		setAbove(true);
@@ -59,19 +53,6 @@ public class Hero extends GameObject{
 		g2.drawRect(x, y, width, height);
 	}
 
-	public void loseLife()
-	{
-		lives--;
-		if(lives <= 0)
-			System.out.println("Game Over.");
-		score = 0;
-		x = STARTING_X;
-		y = STARTING_Y;
-	}
-	public void getPoint(int pointsAdded)
-	{
-		score += pointsAdded;
-	}
 	public void setBoosting(boolean isBoosting)
 	{
 			boosting = isBoosting;
@@ -91,15 +72,6 @@ public class Hero extends GameObject{
 		x = STARTING_X;
 		y = STARTING_Y;
 	}
-	public int getScore()
-	{
-		return score;
-	}
-	public int getLives()
-	{
-		return lives;
-	}
-	
 	public int getVelX() {
 		return velX;
 	}

@@ -21,8 +21,7 @@ public class Coin extends GameObject {
 	@Override
 	public void handlePickup(Hero hero) {
 		if(!collected)
-		{
-			hero.getPoint(1);
+		{  
 			collected = true;
 		}
 	}

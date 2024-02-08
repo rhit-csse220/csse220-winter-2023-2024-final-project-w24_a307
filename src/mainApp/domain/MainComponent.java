@@ -24,14 +24,18 @@ public class MainComponent extends JComponent {
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Coin> coins;
 	private ArrayList<Barrier> barriers;
-
+	private int score;
+	private int lives;
 	private int level;
+	public static final int STARTING_LIVES = 3;
 	public MainComponent()
 	{
 		obstacles = new ArrayList<>();
 		coins = new ArrayList<>();
 		barriers = new ArrayList<>();
 		hero = new Hero();
+		lives = STARTING_LIVES;
+		score = 0;
 		/*
 		gameObjects.add(new Zapper(10, 10, 50, Math.PI/4));
 		Zapper onZapper = new Zapper(100, 10, 50, Math.PI/4);
@@ -85,11 +89,11 @@ public class MainComponent extends JComponent {
 	}
 	public int getScore()
 	{
-		return hero.getScore();
+		return score;
 	}
 	public int getLives()
 	{
-		return hero.getLives();
+		return lives;
 	}
 	public void tick()
 	{
@@ -100,7 +104,9 @@ public class MainComponent extends JComponent {
 			obstacle.update();
 			if(obstacle.overlapsWith(hero))
 			{
-				hero.loseLife();
+				lives--;
+				hero.resetPosition();
+				score = 0;
 				//levelLoader("Level"+level);
 				System.out.println("You died to "+obstacle);
 			}			
@@ -110,7 +116,7 @@ public class MainComponent extends JComponent {
 			coin.update();
 			if(coin.overlapsWith(hero))
 			{
-				hero.getPoint(1);
+				score++;
 				toRemove.add(coin);
 			}			
 		}

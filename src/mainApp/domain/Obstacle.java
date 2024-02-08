@@ -11,7 +11,6 @@ public abstract class Obstacle extends GameObject{
 
 	@Override
 	public void handlePickup(Hero hero) {
-		hero.loseLife();
 		System.out.println("died to "+this);
 	}
 	
