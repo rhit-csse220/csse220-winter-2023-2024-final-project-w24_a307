@@ -101,6 +101,7 @@ public class MainComponent extends JComponent {
 			if(obstacle.overlapsWith(hero))
 			{
 				hero.loseLife();
+				//levelLoader("Level"+level);
 				System.out.println("You died to "+obstacle);
 			}			
 		}
