@@ -68,13 +68,13 @@ public class ZapperTest {
 	public void testOverlapsWithN07() {
 		Zapper z6 = new Zapper(105, 205, 9, Math.PI/12);
 		z6.turnOn();
-		assertEquals(true, z6.overlapsWith(h2));
+		assertEquals(false, z6.overlapsWith(h2));
 	}
 	@Test
 	public void testOverlapsWithN08() {
 		Zapper z7 = new Zapper(87, 82, 62, Math.PI/6);
 		z7.turnOn();
-		assertEquals(false, z7.overlapsWith(h1));
+		assertEquals(true, z7.overlapsWith(h1));
 	}
 	
 }

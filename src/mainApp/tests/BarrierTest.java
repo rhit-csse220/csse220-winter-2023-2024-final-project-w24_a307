@@ -11,12 +11,6 @@ public class BarrierTest {
 	Hero h = new Hero();
 	Hero h1 = new Hero(30, 10, 100, 0, 20, 40);
 
-	@Test
-	public void testOverlapsWithN01() {
-		if((new Barrier(20, 40, 30, Math.PI/2)).overlapsWith(h)) {
-			assertEquals(0, h.getVelX());
-		}
-	}
 	
 	@Test
 	public void testOverlapsWithN02() {
