@@ -10,8 +10,8 @@ import mainApp.domain.Zapper;
 
 public class ZapperTest {
 	Hero h = new Hero();
-	Hero h1 = new Hero(30, 10, 95, 95, 20, 40, 0, 5);
-	Hero h2 = new Hero(30, 10, 70, 175, 20, 80, 0, 5);
+	Hero h1 = new Hero(30, 10, 95, 95, 20, 40);
+	Hero h2 = new Hero(30, 10, 70, 175, 20, 80);
 	/**
 	 * Makes a default hero and another hero with pre-determined position and 
 	 * velocity. Tests if the laser collides with the hero or not.

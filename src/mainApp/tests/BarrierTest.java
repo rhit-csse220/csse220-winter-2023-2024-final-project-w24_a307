@@ -9,7 +9,7 @@ import mainApp.domain.Hero;
 
 public class BarrierTest {
 	Hero h = new Hero();
-	Hero h1 = new Hero(30, 10, 100, 0, 20, 40, 0, 5);
+	Hero h1 = new Hero(30, 10, 100, 0, 20, 40);
 
 	@Test
 	public void testOverlapsWithN01() {

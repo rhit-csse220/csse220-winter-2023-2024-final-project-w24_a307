@@ -9,7 +9,7 @@ import mainApp.domain.Laser;
 
 public class LaserTest {
 	Hero h = new Hero();
-	Hero h1 = new Hero(30, 10, 100, 0, 20, 40, 0, 5);
+	Hero h1 = new Hero(30, 10, 100, 0, 20, 40);
 	/**
 	 * Makes a default hero and another hero with pre-determined position and 
 	 * velocity. Tests if the laser collides with the hero or not.
