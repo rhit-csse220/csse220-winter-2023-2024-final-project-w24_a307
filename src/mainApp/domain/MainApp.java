@@ -46,6 +46,8 @@ public class MainApp {
 				frame.repaint();
 				score.setText("Score: " + component.getScore());
 				lives.setText("Lives: "+component.getLives());
+				if(component.getLives() <= 0)
+					frame.dispose();    
 			}
 		});
 		t.start();
