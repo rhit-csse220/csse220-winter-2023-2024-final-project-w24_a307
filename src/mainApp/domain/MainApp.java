@@ -12,7 +12,7 @@ import javax.swing.Timer;
 
 /**
  * Class: MainApp
- * @author Put your team name here
+ * @author Put your team name here --> a307
  * <br>Purpose: Top level class for CSSE220 Project containing main method 
  * <br>Restrictions: None
  */

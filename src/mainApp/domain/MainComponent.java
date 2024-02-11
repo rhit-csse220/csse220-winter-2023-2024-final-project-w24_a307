@@ -18,6 +18,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import org.junit.runners.Parameterized.Parameter;
+
 public class MainComponent extends JComponent {
 	private Hero hero;
 	private BufferedImage img;
@@ -91,6 +93,11 @@ public class MainComponent extends JComponent {
 	{
 		return hero.getLives();
 	}
+	/*  --- tick method ---
+	 * runs every cycle of the game, checking for each possible interaction
+	 * checks: 
+	 * hero collision with obstacles(coins, missiles, barriers)
+	 */
 	public void tick()
 	{
 		hero.update();
@@ -157,9 +164,17 @@ public class MainComponent extends JComponent {
 		{
 			object.drawOn(g2);
 		}
-	}
+	} 
+	/* --- LEVEL LOADER ---
+	 * ensures: when called, a new level will be loaded according to the specified filename
+	 * sets a new background accordingly, and goes down the lines of the file reading each, and
+	 * implementing each feature. 
+	 * 
+	 * @param: filename to load
+	 */
 	public void levelLoader(String filename)
 	{
+		//getting rid of the old level
 		obstacles.clear();
 		barriers.clear();
 		coins.clear();
