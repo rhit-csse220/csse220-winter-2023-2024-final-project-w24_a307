@@ -13,6 +13,8 @@ public class Hero extends GameObject{
 	private boolean boosting;
 	private boolean yblocked;
 	private boolean above;
+	private boolean shielded;
+	private int immunityCounter;
 	public static final int JETPACK_SPEED = -4;
 	public static final int FALLING_SPEED = 4;
 	public static final int RUNNING_SPEED = 1;
@@ -20,19 +22,43 @@ public class Hero extends GameObject{
 	public static final int BARRY_WIDTH = 30;
 	public static final int STARTING_X = 5;
 	public static final int STARTING_Y = 0;
+	public static final int IMMUNITY_DURATION = 15;
 	
 	public Hero(int velX, int velY, int x, int y, int width, int height) {
 		super(velX, velY, x, y, width, height);
 		boosting = false;
 		yblocked = false;
+		above = true;
+		shielded = false;
+		immunityCounter = 0; 
+
+	}
+	public boolean isImmune()
+	{
+		if(immunityCounter > 0)
+			return true;
+		else if(shielded)
+		{
+			immunityCounter  = IMMUNITY_DURATION;
+			shielded = false;
+			return true;
+		}
+		return false;
+		
 	}
 	public Hero() {
 		super(RUNNING_SPEED, FALLING_SPEED, STARTING_X, STARTING_Y, BARRY_WIDTH, BARRY_HEIGHT);
 		boosting = false;
 		yblocked = false;
-		setAbove(true);
+		above = true;
+		shielded = false;
+		immunityCounter = 0; 
 	}
-	
+	public void update()
+	{
+		super.update();
+		immunityCounter--;
+	}
 	@Override
 	public void handlePickup(Hero hero) {
 		//nothing
@@ -91,5 +117,9 @@ public class Hero extends GameObject{
 	}
 	public void setAbove(boolean above) {
 		this.above = above;
+	}
+	public void setShielded(boolean isShielded)
+	{
+		shielded = isShielded;
 	}
 }

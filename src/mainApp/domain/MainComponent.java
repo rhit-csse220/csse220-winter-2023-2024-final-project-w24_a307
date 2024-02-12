@@ -101,18 +101,24 @@ public class MainComponent extends JComponent {
 	{
 		hero.update();
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		boolean toRestart = false;
 		for(Obstacle obstacle : obstacles)
 		{
 			obstacle.update();
 			if(obstacle.overlapsWith(hero))
 			{
-				lives--;
-				hero.resetPosition();
-				score = 0;
-				//levelLoader("Level"+level);
-				System.out.println("You died to "+obstacle);
+				if(!hero.isImmune())
+				{
+					lives--;
+					hero.resetPosition();
+					score = 0;
+					toRestart = true;
+					System.out.println("You died to "+obstacle);
+				}
 			}			
 		}
+		if(toRestart)
+			levelLoader("Level"+level);
 		for(Coin coin : coins)
 		{
 			coin.update();
@@ -151,6 +157,7 @@ public class MainComponent extends JComponent {
 			levelLoader("Level"+level);
 			hero.resetPosition();
 		}
+		
 
 	}
 	
