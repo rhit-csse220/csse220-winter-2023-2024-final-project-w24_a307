@@ -7,14 +7,17 @@ import java.awt.Graphics2D;
 public class Zapper extends Obstacle {
 	private int length;
 	private int countdown;
+	private int blinkCounter;
+	private boolean blinkOn;
 	private boolean isOn;
 	private int x2;
 	private int y2;
 	private double rotation;
 	public static final int ZAPPER_WIDTH = 10;
 	public static final int ZAPPER_HEIGHT = 10;
-	public static final int TIME_BEFORE_ON = 50;
-	public static final int DURATION = 10;
+	public static final int TIME_BEFORE_ON = 80;
+	public static final int DURATION = 80;
+	public static final int BLINK_INTERVAL = 5;
 	public Zapper(int x, int y, int length, double rotation) {
 		super(0, 0, x, y, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 		this.rotation = rotation;
@@ -22,9 +25,11 @@ public class Zapper extends Obstacle {
 		countdown = TIME_BEFORE_ON;
 		x2 = (int) (x+length*Math.cos(rotation));
 		y2 = (int) (y+length*Math.sin(rotation));
+		blinkCounter = BLINK_INTERVAL;
+		blinkOn = true;
 	}
 	
-	public void turnOn() //for testing, delete later
+	public void turnOn() //for testing
 	{
 		isOn = true;
 	}
@@ -45,6 +50,18 @@ public class Zapper extends Obstacle {
 		}
 		else
 			countdown--;
+		if(countdown < DURATION/2)
+		{
+			blinkCounter--;
+		}
+		else
+			blinkOn = true;
+		if(blinkCounter == 0)
+		{
+			blinkCounter = BLINK_INTERVAL;
+			blinkOn = !blinkOn;
+		}
+		
 	}
 	@Override
 	public void drawOn(Graphics g) {
@@ -56,7 +73,7 @@ public class Zapper extends Obstacle {
 		{
 			g2.fillRect(0, 0, length, ZAPPER_HEIGHT);
 		}
-		else
+		else if(blinkOn)
 		{
 			g2.fillRect(0, 0, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 			g2.fillRect(length-ZAPPER_WIDTH, 0, ZAPPER_WIDTH, ZAPPER_HEIGHT);
