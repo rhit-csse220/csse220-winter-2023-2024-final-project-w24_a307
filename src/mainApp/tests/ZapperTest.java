@@ -10,8 +10,8 @@ import mainApp.domain.Zapper;
 
 public class ZapperTest {
 	Hero h = new Hero();
-	Hero h1 = new Hero(30, 10, 95, 95, 20, 40, 0, 5);
-	Hero h2 = new Hero(30, 10, 70, 175, 20, 80, 0, 5);
+	Hero h1 = new Hero(30, 10, 95, 95, 20, 40);
+	Hero h2 = new Hero(30, 10, 70, 175, 20, 80);
 	/**
 	 * Makes a default hero and another hero with pre-determined position and 
 	 * velocity. Tests if the laser collides with the hero or not.
@@ -68,13 +68,13 @@ public class ZapperTest {
 	public void testOverlapsWithN07() {
 		Zapper z6 = new Zapper(105, 205, 9, Math.PI/12);
 		z6.turnOn();
-		assertEquals(true, z6.overlapsWith(h2));
+		assertEquals(false, z6.overlapsWith(h2));
 	}
 	@Test
 	public void testOverlapsWithN08() {
 		Zapper z7 = new Zapper(87, 82, 62, Math.PI/6);
 		z7.turnOn();
-		assertEquals(false, z7.overlapsWith(h1));
+		assertEquals(true, z7.overlapsWith(h1));
 	}
 	
 }

@@ -42,17 +42,35 @@ public class Barrier extends GameObject{
 		{
 			//System.out.println(this + " x overlap");
 			
-			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) >= hero.y )
+			if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,Math.max(y,y2)) >= hero.y )
 			{
 				//System.out.println("above");
 				
-				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,y2) <= hero.y+hero.height)
+				if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y, Math.max(y2,y)) <= hero.y+hero.height+Math.abs(y2-y))
 				{
 					System.out.println(this+"overlaps with hero"); // for testing
 					System.out.println("Height: "+Math.tan(rotation)*(hero.x+hero.width-x)+y);
 					System.out.println("Hero: "+hero.y);
+					if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y, Math.max(y2,y)) <= hero.y+hero.height+Math.abs(y2-y)-hero.height/2)
+					{
+						if(hero.getVelY()<0)
+							hero.setVelY(0);
+						hero.setYBlocked(true);
+						hero.setAbove(false);
+						//hero.setY(hero.getY()+Hero.JETPACK_SPEED/2);
+					}
+					else if(Math.min(Math.tan(rotation)*(hero.x+hero.width-x)+y,Math.max(y,y2)) >= hero.y + hero.height/2)
+					{
+						if(hero.getVelY()>0)
+							hero.setVelY(0);
+						hero.setYBlocked(true);
+						hero.setAbove(true);
+						//hero.setY(hero.getY()-Hero.JETPACK_SPEED/2);
+					}
+					
+					return true;
 				}
-				return true;
+				
 			}
 			
 			/*
