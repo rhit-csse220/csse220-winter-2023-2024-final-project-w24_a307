@@ -86,7 +86,7 @@ public class MainComponent extends JComponent {
 		});
 		this.setFocusable(true);
 		level = 0;
-	}
+	} 
 	public int getScore()
 	{
 		return score;
