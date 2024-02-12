@@ -37,7 +37,10 @@ public class Hero extends GameObject{
 	public void handlePickup(Hero hero) {
 		//nothing
 	}
-
+	public boolean isFinished()
+	{
+		return MainApp.FRAME_WIDTH == x+width;
+	}
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;

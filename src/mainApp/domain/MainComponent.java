@@ -17,6 +17,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class MainComponent extends JComponent {
 	private Hero hero;
@@ -27,6 +28,7 @@ public class MainComponent extends JComponent {
 	private int score;
 	private int lives;
 	private int level;
+	public static final int FINAL_LEVEL = 4;
 	public static final int STARTING_LIVES = 3;
 	public MainComponent()
 	{
@@ -143,6 +145,12 @@ public class MainComponent extends JComponent {
 			hero.setVelX(Hero.RUNNING_SPEED);
 			hero.setYBlocked(false);
 		}
+		if(hero.isFinished())
+		{
+			level++;
+			levelLoader("Level"+level);
+			hero.resetPosition();
+		}
 
 	}
 	
@@ -170,10 +178,13 @@ public class MainComponent extends JComponent {
 		obstacles.clear();
 		barriers.clear();
 		coins.clear();
+		//if(filename.equals("Level"+FINAL_LEVEL))
+			//TODO:popup
 		try {
 			img = ImageIO.read(new File("images/background-"+filename.toLowerCase()+".jpg"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println("Image not found for level");
 		}
 
 		try {
