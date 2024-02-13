@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
 
 public class Missile extends Obstacle{
 	public static final int MISSILE_X_SPEED = -Hero.RUNNING_SPEED; 
-	public static final int MISSILE_WIDTH = 20;
-	public static final int MISSILE_HEIGHT = 10;
+	public static final int MISSILE_WIDTH = 30;
+	public static final int MISSILE_HEIGHT = 15;
 	public Missile(int x, int y) {
 		super(MISSILE_X_SPEED, 0, x, y, MISSILE_WIDTH, MISSILE_HEIGHT);
 		
