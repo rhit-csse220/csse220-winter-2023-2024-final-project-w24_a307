@@ -14,12 +14,6 @@ public class ShieldPowerUp extends PowerUp {
 	public static final int SHIELD_HEIGHT = 20;
 	public ShieldPowerUp(int x, int y) {
 		super(x, y, SHIELD_WIDTH, SHIELD_HEIGHT);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void handlePickup(Hero hero) {
-		hero.setShielded(true);
 	}
 
 	@Override
@@ -27,7 +21,7 @@ public class ShieldPowerUp extends PowerUp {
 		Graphics2D g2 = (Graphics2D) g;
 		BufferedImage img;
 		try {
-			img = ImageIO.read(new File("images/shield.png"));
+			img = ImageIO.read(new File("images/shieldpixel.png"));
 			g2.drawImage(img, x, y, SHIELD_WIDTH, SHIELD_HEIGHT, null);
 		} catch (IOException e) {
 			e.printStackTrace();

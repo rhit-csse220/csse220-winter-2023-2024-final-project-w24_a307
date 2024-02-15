@@ -25,6 +25,7 @@ public class MainComponent extends JComponent {
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Coin> coins;
 	private ArrayList<Barrier> barriers;
+	private ArrayList<PowerUp> powerUps;
 	private int score;
 	private int lives;
 	private int level;
@@ -35,21 +36,12 @@ public class MainComponent extends JComponent {
 		obstacles = new ArrayList<>();
 		coins = new ArrayList<>();
 		barriers = new ArrayList<>();
+		powerUps = new ArrayList<>();
 		hero = new Hero();
 		lives = STARTING_LIVES;
 		score = 0;
-		/*
-		gameObjects.add(new Zapper(10, 10, 50, Math.PI/4));
-		Zapper onZapper = new Zapper(100, 10, 50, Math.PI/4);
-		gameObjects.add(onZapper);
-		onZapper.turnOn();
-		gameObjects.add(new Laser(40));
-		Laser onLaser = new Laser(100);
-		onLaser.turnOn();
-		gameObjects.add(onLaser);
-		gameObjects.add(new Coin(200,100));
-		gameObjects.add(new Barrier(200, 10, 50, Math.PI/4));
-		*/
+		level = 1;
+		levelLoader("Level1");
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e)
@@ -87,7 +79,6 @@ public class MainComponent extends JComponent {
 			}
 		});
 		this.setFocusable(true);
-		level = 0;
 	} 
 	public int getScore()
 	{
@@ -100,7 +91,7 @@ public class MainComponent extends JComponent {
 	public void tick()
 	{
 		hero.update();
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		
 		boolean toRestart = false;
 		for(Obstacle obstacle : obstacles)
 		{
@@ -115,22 +106,38 @@ public class MainComponent extends JComponent {
 					toRestart = true;
 					System.out.println("You died to "+obstacle);
 				}
+				
 			}			
 		}
 		if(toRestart)
 			levelLoader("Level"+level);
+		ArrayList<GameObject> coinsToRemove = new ArrayList<GameObject>();
 		for(Coin coin : coins)
 		{
 			coin.update();
 			if(coin.overlapsWith(hero))
 			{
 				score++;
-				toRemove.add(coin);
+				coinsToRemove.add(coin);
 			}			
 		}
-		for(GameObject object : toRemove)
+		for(GameObject object : coinsToRemove)
 		{
 			coins.remove(object);
+		}
+		ArrayList<GameObject> powersToRemove = new ArrayList<GameObject>();
+		for(PowerUp power : powerUps)
+		{
+			power.update();
+			if(power.overlapsWith(hero))
+			{
+				hero.setShielded(true);
+				powersToRemove.add(power);
+			}
+		}
+		for(GameObject object : powersToRemove)
+		{
+			powerUps.remove(object);
 		}
 		boolean blocked = false;
 		for(Barrier barrier : barriers)
@@ -179,12 +186,22 @@ public class MainComponent extends JComponent {
 		{
 			object.drawOn(g2);
 		}
+		for(GameObject object : powerUps)
+		{
+			object.drawOn(g2);
+		}
 	}
 	public void levelLoader(String filename)
 	{
+		if(filename.equals("Level0") || filename.equals("level"+FINAL_LEVEL)) //for testing
+		{
+			lives = 0;
+			return;
+		}
 		obstacles.clear();
 		barriers.clear();
 		coins.clear();
+		powerUps.clear();
 		//if(filename.equals("Level"+FINAL_LEVEL))
 			//TODO:popup
 		try {
@@ -296,6 +313,22 @@ public class MainComponent extends JComponent {
 						throw new InvalidLevelFormatException();
 					}
 				}
+				else if(nextLine.equals("Shield"))
+				{
+					try {
+						powerUps.add(new ShieldPowerUp(s.nextInt(),s.nextInt()));
+					}
+					catch(InputMismatchException e)
+					{
+						System.err.println("ShieldError");
+						throw new InvalidLevelFormatException();
+					}
+					catch(NoSuchElementException e)
+					{
+						System.err.println("ShieldError");
+						throw new InvalidLevelFormatException();
+					}
+				}
 			}
 		}
 		catch(InvalidLevelFormatException e)
@@ -308,5 +341,14 @@ public class MainComponent extends JComponent {
 		}
 		
 		
+	}
+	public void restart()
+	{
+		hero.resetPosition();
+		lives = STARTING_LIVES;
+		score = 0;
+		level = 1;
+		levelLoader("Level1");
+		System.out.println("restarted");
 	}
 }

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 public abstract class GameObject {
 	protected int velX, velY, x, y, width, height;
-	public abstract void handlePickup(Hero hero);
 	public abstract void drawOn(Graphics g);
 	public void update()
 	{

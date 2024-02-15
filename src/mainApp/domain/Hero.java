@@ -22,7 +22,7 @@ public class Hero extends GameObject{
 	public static final int BARRY_WIDTH = 30;
 	public static final int STARTING_X = 5;
 	public static final int STARTING_Y = 0;
-	public static final int IMMUNITY_DURATION = 15;
+	public static final int IMMUNITY_DURATION = 40;
 	
 	public Hero(int velX, int velY, int x, int y, int width, int height) {
 		super(velX, velY, x, y, width, height);
@@ -59,10 +59,7 @@ public class Hero extends GameObject{
 		super.update();
 		immunityCounter--;
 	}
-	@Override
-	public void handlePickup(Hero hero) {
-		//nothing
-	}
+
 	public boolean isFinished()
 	{
 		return MainApp.FRAME_WIDTH == x+width;
@@ -77,8 +74,10 @@ public class Hero extends GameObject{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		g2.setColor(Color.BLACK);
+		if(shielded)
+			g2.setColor(Color.BLUE);
+		else
+			g2.setColor(Color.BLACK);
 		g2.drawRect(x, y, width, height);
 	}
 
@@ -100,6 +99,8 @@ public class Hero extends GameObject{
 	{
 		x = STARTING_X;
 		y = STARTING_Y;
+		velY = FALLING_SPEED;
+		velX = RUNNING_SPEED;
 	}
 	public int getVelX() {
 		return velX;

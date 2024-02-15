@@ -32,10 +32,6 @@ public class Barrier extends GameObject{
 		g2.rotate(-rotation);
 		g2.translate(-x,-y);
 	}
-	@Override
-	public void handlePickup(Hero hero) {
-		
-	}
 	public boolean overlapsWith(Hero hero)
 	{
 		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)

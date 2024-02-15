@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,7 +48,35 @@ public class MainApp {
 				score.setText("Score: " + component.getScore());
 				lives.setText("Lives: "+component.getLives());
 				if(component.getLives() <= 0)
-			  		frame.dispose();    
+				{
+					frame.getContentPane().removeAll();
+					JPanel endScreen = new JPanel();
+					JButton restart = new JButton("Restart");
+					JButton quit = new JButton("Quit");
+					endScreen.add(restart);
+					endScreen.add(quit);
+					restart.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							frame.getContentPane().removeAll();
+							component.restart();
+							frame.add(info, BorderLayout.NORTH);
+							frame.add(component);
+							component.grabFocus();
+							frame.repaint();
+							frame.setVisible(true);
+						}});
+					quit.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							System.exit(0);
+						}});
+					frame.add(endScreen, BorderLayout.CENTER);
+					frame.repaint();
+					frame.setVisible(true);
+				}
 			}
 		});
 		t.start();
