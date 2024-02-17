@@ -5,6 +5,13 @@ import java.awt.Graphics;
 public abstract class GameObject {
 	protected int velX, velY, x, y, width, height;
 	public abstract void drawOn(Graphics g);
+	/* --- UPDATE METHOD ---
+	 * ensures: moves the character in accordance to the current 
+	 * 		x and y velocities every tick
+	 * checks: 
+	 *  	if - x/y position would make it out of frame
+	 *    then - x/y is set back to the border edge
+	 */
 	public void update()
 	{
 		x += velX;
@@ -18,6 +25,11 @@ public abstract class GameObject {
 		else if (y < 0)
 			y = 0;
 	}
+	/* --- OVERLAPSWITH METHOD ---
+	 * ensures: object's hitbox is checked along with the current position of the 
+	 * 		hero to see if they are overlapping and returns true if yes
+	 * returns: boolean 
+	 */
 	public boolean overlapsWith(Hero hero)
 	{
 		if(x+width > hero.x && x < hero.x + hero.width)
@@ -30,6 +42,9 @@ public abstract class GameObject {
 		}
 		return false;
 	}
+	/*  constructor
+	 *  parameters: x/y velocity, x/y position, width, height
+	 */
 	public GameObject(int velX, int velY, int x, int y, int width, int height) {
 		super();
 		this.velX = velX;
@@ -39,6 +54,7 @@ public abstract class GameObject {
 		this.height = height;
 		this.width = width;
 	}
+	// --- various getters and setters below ---
 	public int getVelX() {
 		return velX;
 	}
