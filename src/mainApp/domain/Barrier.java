@@ -12,6 +12,9 @@ public class Barrier extends GameObject{
 	private int y2;
 	private boolean above;
 	public static final int BARRIER_HEIGHT = 10;
+	/* Main Barrier Constructor
+	 * @param: x, y position, length and rotation of barrier
+	 */
 	public Barrier(int x, int y, int length, double rotation)
 	{
 		super(0, 0, x, y, length, BARRIER_HEIGHT);
@@ -22,6 +25,9 @@ public class Barrier extends GameObject{
 		above = false;
 		System.out.println("New Barrier with "+x+", "+y+" "+x2+","+y2);
 	}
+	/* 
+	 * ensures: the main drawOn method is overridden to draw a barrier
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -32,6 +38,12 @@ public class Barrier extends GameObject{
 		g2.rotate(-rotation);
 		g2.translate(-x,-y);
 	}
+	/*   --- overlapsWith method ---
+	 * ensures: proper collisions with the hero 
+	 * checks:
+	 *   	 if -  half the hero is above/below the barrier 
+	 *     then -  the hero is pushed up/down accordingly
+	 */ 
 	public boolean overlapsWith(Hero hero)
 	{
 		if(Math.cos(rotation)*length+x > hero.x && x < hero.x + hero.width)
