@@ -1,5 +1,10 @@
 package mainApp.domain;
-
+/**
+ * Class: Coin
+ * @author Joshua Yang, James Fusco
+ * <br>Purpose: used to give hero score
+ * <br>Restrictions: only increments hero score
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
