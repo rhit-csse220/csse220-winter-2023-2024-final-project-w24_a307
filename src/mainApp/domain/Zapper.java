@@ -3,7 +3,16 @@ package mainApp.domain;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+/**
+ * Class: Zapper
+ * @author Joshua Yang
+ * <br>Purpose: Used to create zapper objects
+ * <br>Restrictions: cannot be used for making other types of barriers
+ * <br>For example: 
+ * <pre>
+ *    obstacles.add(new Zapper(s.nextInt(),s.nextInt(),s.nextInt(),s.nextDouble()));
+ * </pre>
+ */
 public class Zapper extends Obstacle {
 	private int length;
 	private int countdown;
@@ -18,6 +27,9 @@ public class Zapper extends Obstacle {
 	public static final int TIME_BEFORE_ON = 80;
 	public static final int DURATION = 80;
 	public static final int BLINK_INTERVAL = 5;
+	/*
+ 	 * ensures: initializes the zapper object
+   	 */
 	public Zapper(int x, int y, int length, double rotation) {
 		super(0, 0, x, y, ZAPPER_WIDTH, ZAPPER_HEIGHT);
 		this.rotation = rotation;
@@ -27,13 +39,17 @@ public class Zapper extends Obstacle {
 		y2 = (int) (y+length*Math.sin(rotation));
 		blinkCounter = BLINK_INTERVAL;
 		blinkOn = true;
-	}
-	
+	}//Zapper
 	public void turnOn() //for testing
 	{
 		isOn = true;
 	}
-	
+	/* --- overridden update method ---
+	 * ensures: checks:
+	 *    if - countdown runs out and zapper is off/on
+	 *  then - the zapper turns back on/off
+	 *  (before turning on, the zapper will have a blink effect for short duration)
+	 */
 	@Override
 	public void update()
 	{
@@ -62,7 +78,10 @@ public class Zapper extends Obstacle {
 			blinkOn = !blinkOn;
 		}
 		
-	}
+	}//update
+	/*
+	 * ensures: drawOn method is overridden for the zapper
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -80,7 +99,10 @@ public class Zapper extends Obstacle {
 		}
 		g2.rotate(-rotation);
 		g2.translate(-x,-y);
-	}
+	}//drawOn
+	/*
+	 * ensures: zapper's overlap method works with collisions involving the hero
+	 */
 	@Override
 	public boolean overlapsWith(Hero hero)
 	{
@@ -101,5 +123,5 @@ public class Zapper extends Obstacle {
 			}
 		}
 		return false;
-	}
+	}//overlapsWith
 }
