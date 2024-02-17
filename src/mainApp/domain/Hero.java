@@ -23,7 +23,7 @@ public class Hero extends GameObject{
 	public static final int STARTING_X = 5;
 	public static final int STARTING_Y = 0;
 	public static final int IMMUNITY_DURATION = 40;
-	
+	// --- constructor ---
 	public Hero(int velX, int velY, int x, int y, int width, int height) {
 		super(velX, velY, x, y, width, height);
 		boosting = false;
@@ -33,6 +33,12 @@ public class Hero extends GameObject{
 		immunityCounter = 0; 
 
 	}
+	/* --- isIMMUNE method ---
+	 * ensures: if the shield is active and an obstacle is hit, the player
+	 * 		will not lose a life and instead loses the shield. 
+	 * - This is on a timer; if nothing is hit and the timer runs out, the player
+	 *   loses the shield regardless
+	 */
 	public boolean isImmune()
 	{
 		if(immunityCounter > 0)
@@ -46,6 +52,7 @@ public class Hero extends GameObject{
 		return false;
 		
 	}
+	// default constructor
 	public Hero() {
 		super(RUNNING_SPEED, FALLING_SPEED, STARTING_X, STARTING_Y, BARRY_WIDTH, BARRY_HEIGHT);
 		boosting = false;
@@ -54,16 +61,25 @@ public class Hero extends GameObject{
 		shielded = false;
 		immunityCounter = 0; 
 	}
+	/* hero update method 
+	 *  (mainly inherited from super)
+         * ensures: hero is updated properly.
+	 */
 	public void update()
 	{
 		super.update();
-		immunityCounter--;
+		immunityCounter--;   // timer to make sure the immunity is limited in time
 	}
-
+	/* isFinished method
+         * returns: true if hero is at the end of the screen (far right edge), else false.
+	 */
 	public boolean isFinished()
 	{
 		return MainApp.FRAME_WIDTH == x+width;
 	}
+	/* --- hero drawOn method ---
+	 * ensures: hero image is drawn as well as the black box showing the hitbox
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -80,7 +96,12 @@ public class Hero extends GameObject{
 			g2.setColor(Color.BLACK);
 		g2.drawRect(x, y, width, height);
 	}
-
+	/*  --- BOOSTING METHOD ---
+	 * ensures: when the boosting button is pressed, the velocity is set:
+	 * 		sets Y velocity to JETPACK_SPEED, until it is hitting another object 
+	 * 			then it is set to FALLING_SPEED
+	 * param: boolean isBoosting
+	 */
 	public void setBoosting(boolean isBoosting)
 	{
 			boosting = isBoosting;
@@ -95,6 +116,9 @@ public class Hero extends GameObject{
 					velY = FALLING_SPEED;
 			}
 	}
+	/* resetPosition method
+	 * ensures: hero position is returned to the original starting spot
+	 */
 	public void resetPosition()
 	{
 		x = STARTING_X;
@@ -102,6 +126,7 @@ public class Hero extends GameObject{
 		velY = FALLING_SPEED;
 		velX = RUNNING_SPEED;
 	}
+	// --- various getters and setters below ---
 	public int getVelX() {
 		return velX;
 	}
