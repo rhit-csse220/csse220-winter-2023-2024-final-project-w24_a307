@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 /**
  * Class: MainApp
- * @author Put your team name here
+ * @author A307
  * <br>Purpose: Top level class for CSSE220 Project containing main method 
  * <br>Restrictions: None
  */
@@ -25,7 +25,7 @@ public class MainApp {
 	{
 		
 	}
-	//some comment
+	//runs the application
 	private void runApp() {
 		MainComponent component = new MainComponent();
 		JFrame frame = new JFrame("Jetpack Joyride");
