@@ -8,7 +8,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+/*
+ * Class: Missile
+ * @author A307
+ * Purpose: Stores information about Missile obstacles that fly across the screen.
+ */
 public class Missile extends Obstacle{
 	public static final int MISSILE_X_SPEED = -Hero.RUNNING_SPEED; 
 	public static final int MISSILE_WIDTH = 30;

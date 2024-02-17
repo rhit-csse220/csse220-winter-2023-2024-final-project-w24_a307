@@ -18,7 +18,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+/*
+ * Class: MainComponent
+ * @author A307
+ * Purpose: Stores GameObjects, loads levels, handles collisions.
+ */
 public class MainComponent extends JComponent {
 	private Hero hero;
 	private BufferedImage img;

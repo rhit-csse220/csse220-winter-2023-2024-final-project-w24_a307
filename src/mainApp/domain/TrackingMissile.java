@@ -1,5 +1,9 @@
 package mainApp.domain;
-
+/*
+ * Class: TrackingMissile
+ * @author A307
+ * Purpose: modified version of Missile that tracks the hero
+ */
 public class TrackingMissile extends Missile{
 	private Hero hero;
 	public static final int TRACKING_SPEED = Math.abs(Hero.JETPACK_SPEED/3);
@@ -8,6 +12,9 @@ public class TrackingMissile extends Missile{
 		this.hero = hero;
 	}
 	
+	/*
+	 * ensures: TrackingMissile adjusts its y velocity towards the hero
+	 */
 	@Override
 	public void update()
 	{
