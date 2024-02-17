@@ -1,5 +1,10 @@
 package mainApp.domain;
-
+/**
+ * Class: GameObject
+ * @author Joshua Yang, James Fusco
+ * <br>Purpose: used as an abstract class for other objects 
+ * <br>Restrictions: Cannot be used for objects that are not in the game
+ */
 import java.awt.Graphics;
 
 public abstract class GameObject {
