@@ -1,7 +1,7 @@
 package mainApp.domain;
 /*
  * Class: TrackingMissile
- * @author A307
+ * @author Joshua Yang
  * Purpose: modified version of Missile that tracks the hero
  */
 public class TrackingMissile extends Missile{

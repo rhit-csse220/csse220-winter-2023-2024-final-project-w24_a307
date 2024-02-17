@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 /*
  * Class: MainComponent
- * @author A307
+ * @author Joshua Yang, James Fusco, Owen Macrowski, Rohan Malipeddi
  * Purpose: Stores GameObjects, loads levels, handles collisions.
  */
 public class MainComponent extends JComponent {
