@@ -12,31 +12,11 @@ import javax.imageio.ImageIO;
 public class Coin extends GameObject {
 	public static final int COIN_WIDTH = 20;
 	public static final int COIN_HEIGHT = 20;
-	private boolean collected;
 	/*
 	 *  --- coin constructor ---
 	 */
 	public Coin(int x, int y) {
 		super(0, 0, x, y, COIN_WIDTH, COIN_HEIGHT);
-		collected = false;
-	}
-	/* --- handlePickup overridden method ---
-	 * ensures: when the hero "picks up" the coin, variable 'collected' is set to true
-	 */
-	@Override
-	public void handlePickup(Hero hero) {
-		if(!collected)
-		{  
-			collected = true;
-		}
-	}
-	/* --- toRemove overridden method ---
-	 * returns true if coin is collected, else false
-	 */
-	@Override 
-	public boolean toRemove()
-	{
-		return collected;
 	}
 	/* --- coin drawOn method ---
 	 * ensures: image of coin is loaded from images folder and is scaled accordingly
