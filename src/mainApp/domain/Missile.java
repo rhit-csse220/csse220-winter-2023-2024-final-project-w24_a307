@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 /*
  * Class: Missile
- * @author A307
+ * @author Joshua Yang
  * Purpose: Stores information about Missile obstacles that fly across the screen.
  */
 public class Missile extends Obstacle{
