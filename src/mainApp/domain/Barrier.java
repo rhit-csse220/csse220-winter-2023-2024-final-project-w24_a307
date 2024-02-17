@@ -3,7 +3,11 @@ package mainApp.domain;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+/*
+ * Class: Barrier
+ * @author: Joshua Yang, James Fusco
+ * Purpose: creates barrier objects that Hero can collide with.
+ */
 public class Barrier extends GameObject{
 
 	private int length;

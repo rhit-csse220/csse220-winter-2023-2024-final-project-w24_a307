@@ -8,7 +8,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
+/*
+ * Class: Hero
+ * @author Joshua Yang, James Fusco
+ * Purpose: Player controlled object, handles movement and stores data.
+ */
 public class Hero extends GameObject{
 	private boolean boosting;
 	private boolean yblocked;
