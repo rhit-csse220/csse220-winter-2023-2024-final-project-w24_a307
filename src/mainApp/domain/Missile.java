@@ -21,6 +21,10 @@ public class Missile extends Obstacle{
 		super(MISSILE_X_SPEED, 0, x, y, MISSILE_WIDTH, MISSILE_HEIGHT);
 		
 	}
+	/*
+	 * ensures: takes image from images folder and draws it to the specified sizes
+	 * (MISSILE_WIDTH and MISSILE_HEIGHT)
+	 */
 	@Override
 	public void drawOn(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -33,7 +37,7 @@ public class Missile extends Obstacle{
 		}
 		//g2.setColor(Color.RED);
 		//g2.fillOval(x, y, width, height);
-	}
+	}//drawOn
 	@Override 
 	public void update()
 	{
